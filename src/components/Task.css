@@ -1,0 +1,39 @@
+.task_container {
+  background: #fff;
+  min-height: 5rem;
+  padding: 0.1rem;
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.7rem;
+  border-radius: 5px;
+  padding: 0.4rem 0.8rem;
+  color: black;
+  justify-content: space-between;
+}
+
+.task_state_wrapper {
+  display: flex;
+  justify-content: end;
+}
+
+.task_text_component {
+  padding: 0.2rem 0.4rem;
+  border: 1px solid;
+  border-radius: 10px;
+  font-size: 0.7em;
+}
+/* --COLOR-GRAY: #333333;
+--COLOR-GRAY-DARK: #222222;
+--COLOR-GRAY-LIGHT: #cccccc;
+--COLOR-ONGOING: #98c1d9;
+--COLOR-DONE: #ee6c4d; */
+
+.PLANNED_names {
+  background: var(--COLOR-GRAY-LIGHT);
+}
+.ONGOING_names {
+  background: var(--COLOR-ONGOING);
+}
+.DONE_names {
+  background: var(--COLOR-DONE);
+}
