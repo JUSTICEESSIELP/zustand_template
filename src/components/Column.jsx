@@ -26,7 +26,7 @@ const Column = ({ states }) => {
   //     () => task.filter((x) => x.state == states),
   //     [task, states]
   //   );
-//3. custom function to check the change in the array
+  //3. custom function to check the change in the array
   const task = useTaskStore(
     (state) => state.tasks.filter((x) => x.state == states),
     (prev, next) => {
@@ -47,8 +47,8 @@ const Column = ({ states }) => {
       {states}
 
       {task &&
-        task.map((x) => {
-          return <Task title={x.title} taskState={x.state} />;
+        task.map((x, key) => {
+          return <Task key={key.title} title={x.title} taskState={x.state} />;
         })}
     </div>
   );
