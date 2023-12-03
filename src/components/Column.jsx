@@ -2,7 +2,7 @@ import useTaskStore from "../store/store";
 import "./Column.css";
 
 import Task from "./Task";
-
+import { shallow } from "zustand/shallow";
 // eslint-disable-next-line react/prop-types
 const Column = ({ states }) => {
   console.log(states);
