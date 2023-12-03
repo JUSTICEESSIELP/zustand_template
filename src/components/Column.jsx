@@ -1,4 +1,4 @@
-import useTaskStore from "../store/store";
+import { useTaskStore } from "../store/store";
 import "./Column.css";
 
 import { useMemo } from "react";
@@ -7,8 +7,6 @@ import Task from "./Task";
 import { shallow } from "zustand/shallow";
 // eslint-disable-next-line react/prop-types
 const Column = ({ states }) => {
-  console.log(states);
-
   //   now there is sth to note about subscribing to the state ..... so normally we would have
   // like zustand making the component subscribe to the exact thing it wants to and not the whole object
   // but then when we use things like filter or map or other High level functions they cause return a new instance of an array and would cause re render since the Virtual Dom thinks there is a change in the state
@@ -22,11 +20,25 @@ const Column = ({ states }) => {
   //     shallow
   //   );
 
-  //2. using the useMemo
-  const task = useTaskStore((state) => state.tasks);
-  const filteredTask = useMemo(
-    () => task.filter((x) => x.state == states),
-    [task, states]
+  //   //2. using the useMemo
+  //   const task = useTaskStore((state) => state.tasks);
+  //   const filteredTask = useMemo(
+  //     () => task.filter((x) => x.state == states),
+  //     [task, states]
+  //   );
+//3. custom function to check the change in the array
+  const task = useTaskStore(
+    (state) => state.tasks.filter((x) => x.state == states),
+    (prev, next) => {
+      console.log(prev, "PREVVV");
+      console.log(next, "NNEcxxttz");
+      const longest = prev.length > next.length ? prev.length : next.length;
+      for (let i = 0; i < longest; i++) {
+        if (!prev[i] || !next[i]) return false;
+        if (prev[i] !== next[i]) return false;
+      }
+      return true;
+    }
   );
 
   console.log(task);
@@ -34,8 +46,8 @@ const Column = ({ states }) => {
     <div className="column">
       {states}
 
-      {filteredTask &&
-        filteredTask.map((x) => {
+      {task &&
+        task.map((x) => {
           return <Task title={x.title} taskState={x.state} />;
         })}
     </div>

@@ -1,7 +1,6 @@
 import { create } from "zustand";
 
-const useTaskStore = create((set) => ({
+export const useTaskStore = create((set) => ({
   tasks: [{ title: "Read Manging the mind", state: "DONE" }],
+  bear: 0,
 }));
-
-export default useTaskStore;
