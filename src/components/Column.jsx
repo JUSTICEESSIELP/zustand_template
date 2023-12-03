@@ -5,6 +5,7 @@ import { useMemo } from "react";
 
 import Task from "./Task";
 import { shallow } from "zustand/shallow";
+
 // eslint-disable-next-line react/prop-types
 const Column = ({ states }) => {
   //   now there is sth to note about subscribing to the state ..... so normally we would have
@@ -20,34 +21,41 @@ const Column = ({ states }) => {
   //     shallow
   //   );
 
-  //   //2. using the useMemo
-  //   const task = useTaskStore((state) => state.tasks);
-  //   const filteredTask = useMemo(
-  //     () => task.filter((x) => x.state == states),
-  //     [task, states]
-  //   );
-  //3. custom function to check the change in the array
-  const task = useTaskStore(
-    (state) => state.tasks.filter((x) => x.state == states),
-    (prev, next) => {
-      console.log(prev, "PREVVV");
-      console.log(next, "NNEcxxttz");
-      const longest = prev.length > next.length ? prev.length : next.length;
-      for (let i = 0; i < longest; i++) {
-        if (!prev[i] || !next[i]) return false;
-        if (prev[i] !== next[i]) return false;
-      }
-      return true;
-    }
+  //2. using the useMemo
+  const task = useTaskStore((state) => state.tasks);
+  const filteredTask = useMemo(
+    () => task.filter((x) => x.state == states),
+    [task, states]
   );
+  //   //3. custom function to check the change in the array
+  //   const task = useTaskStore(
+  //     (state) => state.tasks.filter((x) => x.state == states),
+  //     // (prev, next) => {
+  //     //   const longest = prev.length > next.length ? prev.length : next.length;
+  //     //   for (let i = 0; i < longest; i++) {
+  //     //     if (!prev[i] || !next[i]) return false;
+  //     //     if (prev[i] !== next[i]) return false;
+  //     //   }
+  //     //   return true;
+  //     // }
+  //     shallow
+  //   );
+  const addTaskFunction = useTaskStore((state) => state.addtask);
 
-  console.log(task);
+  const handleAddTask = (e) => {
+    console.log(filteredTask, "BEFORE ADDING");
+    addTaskFunction("new Task ", states);
+    console.log(filteredTask, "AFTER ADDING");
+  };
   return (
     <div className="column">
-      {states}
+      <div className="column_state_button_wrapper">
+        {states}
+        <button onClick={() => handleAddTask()}>Add</button>
+      </div>
 
-      {task &&
-        task.map((x, key) => {
+      {filteredTask &&
+        filteredTask.map((x, key) => {
           return <Task key={key.title} title={x.title} taskState={x.state} />;
         })}
     </div>

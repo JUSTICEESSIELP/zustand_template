@@ -9,7 +9,6 @@ const Task = ({ taskState, title }) => {
     (state) => state.tasks.find((x) => x.title == title),
     shallow
   );
-  console.log(titles);
 
   return (
     <div className="task_container">

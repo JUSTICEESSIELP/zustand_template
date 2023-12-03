@@ -8,3 +8,21 @@
   border-radius: 4px;
   padding: 0.4rem;
 }
+
+.column_state_button_wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.column_state_button_wrapper button {
+  all: unset;
+  height: fit-content;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  background: var(--COLOR-GRAY);
+}
+.column_state_button_wrapper button:hover {
+  background: white;
+  color: black;
+}
