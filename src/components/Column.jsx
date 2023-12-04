@@ -6,10 +6,12 @@ import { useMemo, useState, useRef, useEffect } from "react";
 import Task from "./Task";
 import { shallow } from "zustand/shallow";
 import Modal from "./Modal";
+import classNames from "classnames";
 
 // eslint-disable-next-line react/prop-types
 const Column = ({ states }) => {
   const [isModalOpened, setModalOpen] = useState(false);
+  const [isDragOver, setDragOver] = useState(false);
 
   const [titleText, setTitleText] = useState("");
   const taskStateRef = useRef();
@@ -47,6 +49,9 @@ const Column = ({ states }) => {
   //     shallow
   //   );
   const addTaskFunction = useTaskStore((state) => state.addtask);
+  const setMovedTask = useTaskStore((store) => store.setMovedTask);
+  const moveTaskAction = useTaskStore((store) => store.moveTaskAction);
+  const movedTask = useTaskStore((store) => store.movedTask);
 
   const handleOpenModal = () => {
     setModalOpen(!isModalOpened);
@@ -62,7 +67,19 @@ const Column = ({ states }) => {
     // console.log(filteredTask, "AFTER ADDING", states);
   };
   return (
-    <div className="column">
+    <div
+      className={classNames("column", { "is-drag-over": isDragOver })}
+      onDrop={() => {
+        moveTaskAction(movedTask, states);
+        setMovedTask(null);
+        setDragOver(false);
+      }}
+      onDragLeave={() => setDragOver(false)}
+      onDragOver={(e) => {
+        e.preventDefault();
+        setDragOver(true);
+      }}
+    >
       <div className="column_state_button_wrapper">
         {states}
         <button onClick={() => handleOpenModal()}>Add</button>

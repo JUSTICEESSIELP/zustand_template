@@ -7,6 +7,7 @@
   margin: 0 0.5rem;
   border-radius: 4px;
   padding: 0.4rem;
+  border: 3px transparent white;
 }
 
 .column_state_button_wrapper {
@@ -25,6 +26,10 @@
 .column_state_button_wrapper button:hover {
   background: white;
   color: black;
+}
+
+.column.is-drag-over {
+  border: 3px solid white;
 }
 
 .modal_container {

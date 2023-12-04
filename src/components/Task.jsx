@@ -10,9 +10,27 @@ const Task = ({ taskState, title }) => {
     shallow
   );
 
+  const taskDelete = useTaskStore((store) => store.deleteTask);
+  const setMovedTask = useTaskStore((store) => store.setMovedTask);
+
+  const handleDelete = (title) => {
+    console.log(title, "DDTTTILLE");
+    taskDelete(title);
+  };
+
+  
+
   return (
-    <div className="task_container">
-      {titles.title}
+    <div
+      className="task_container"
+      draggable={true}
+      onDragStart={() => setMovedTask(titles.title)}
+    >
+      <div className="title_delete_wrapper">
+        {titles.title}
+        <button onClick={() => handleDelete(titles.title)}>Delete</button>
+      </div>
+
       <div className="task_state_wrapper">
         <div
           className={classNames("task_text_component", `${taskState}_names`)}

@@ -37,3 +37,21 @@
 .DONE_names {
   background: var(--COLOR-DONE);
 }
+.title_delete_wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title_delete_wrapper button {
+  all: unset;
+  height: fit-content;
+  padding: 0.1rem 0.2rem;
+  border-radius: 3px;
+  background: var(--COLOR-GRAY);
+  color: white;
+  font-size: 0.9rem;
+}
+.title_delete_wrapper button:hover {
+  background: white;
+  color: black;
+}
