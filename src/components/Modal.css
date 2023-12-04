@@ -1,0 +1,22 @@
+.modal_card_container {
+  background: white;
+
+  height: 20rem;
+  width: 35rem;
+}
+
+.modal_card_container input {
+  padding: 0.4rem 0.8rem;
+  border-radius: 14px;
+  display: block;
+}
+
+.modal_card_container button {
+  width: 70%;
+  padding: 0.8rem 1rem;
+  all: unset;
+  height: fit-content;
+
+  border-radius: 10px;
+  background: var(--COLOR-GRAY);
+}

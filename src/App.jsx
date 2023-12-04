@@ -2,7 +2,7 @@ import "./App.css";
 import Column from "./components/Column";
 
 function App() {
-  const taskState = Array.from(["PLANNING", "ONGOING", "DONE"]);
+  const taskState = ["PLANNING", "ONGOING", "DONE"];
 
   return (
     <>
